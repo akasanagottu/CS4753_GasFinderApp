@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>About</title>
+    <style type="text/css">
+
+        /* body of website style */
+        body
+        {
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            font-size: 12px;
+           	position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #2f3c66;
+            filter: blur(5px);
+            z-index: 0;
+        }
+
+        /* legend for the fieldset - Welcome */
+        legend
+        {
+            text-align: center;
+            font-size: 24px;
+            border: 1px solid rgba(255,255,255,0.6);
+            border-radius: 25px;
+            background: #d78c2a;
+            color: #2f3c66;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+
+        /* where the logo would go */
+        img
+        {
+            position: fixed;
+            top: 1%;
+            left: 50%;
+            height: 180px;
+            width: 180px;
+            transform: translate(-50%,0%);
+            z-index: 2;
+        }
+
+        /*user options location */
+        fieldset
+        {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            height: 200px;
+            width: 300px;
+            transform: translate(-50%, -50%);
+            background: #2f3c66;
+            border: 1px solid rgba(255,255,255,0.6);
+            border-radius: 10px;
+            padding: 10px;
+            z-index: 2;
+        }
+
+        /* style and actions for the buttons */
+        input[type='submit']
+        {
+            width: 260px;
+            height: 35px;
+            background: #d78c2a;
+            border: 1px solid #fff;
+            cursor: pointer;
+            border-radius: 10px;
+            color: #2f3c66;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 6px;
+            margin-top: 15px;
+        }
+        input[type='submit']:hover
+        {
+            opacity: 0.8;
+        }
+        input[type='submit']:active
+        {
+            opacity: 0.6;
+        }
+
+        /* hyperlink to the register page */
+        a:link
+        {
+            display: inline-block;
+            color: #ffffff;
+            font-size: 12px;
+            margin-top: 6px;
+            text-decoration: none;
+        }
+        a:hover
+        {
+            color: #888;
+        }
+        a:active
+        {
+            color: #000;
+        }
+        a:visited
+        {
+            color: #ffffff;
+            margin: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <img src="gaslogo.png" alt="Logo">
+
+    <fieldset align= "center">
+        <legend> About </legend>
+
+        <form action="Search.html">
+            <input type="submit" value="Search"/>
+        </form>
+
+        <form action="SubmitPrice.html">
+            <input type="submit" value="Submit Prices"/>
+        </form>
+
+        <form action="Account.html">
+            <input type="submit" value="Account"/>
+        </form>
+
+    </fieldset>
+
+<div style="height:18%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
+<div style="height:64%; width: 100%; text-align: center; background-color: white;"></div>
+<div style="height:9%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
+<div id="footer" align="center">
+	<ul>
+		<a href="About.html">About &emsp;</a>
+		<a href="#">&emsp; Help &emsp;</a>
+		<a href="#">&emsp; Contact &emsp;</a>
+		<a href="#">&emsp; Terms &emsp;</a>
+		<a href="#">&emsp;Privacy &emsp;</a>
+		<a href="Advertise.html">&emsp;Advertise&emsp;</a>
+        &emsp;Copyright &copy; 2015
+	</ul>
+</div>
+</body>
+</html>
