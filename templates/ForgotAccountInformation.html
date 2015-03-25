@@ -2,15 +2,16 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Main Page</title>
+    <title> Forgot Account Information </title>
     <style type="text/css">
         /* body of website style */
         body
         {
             margin: 0;
             padding: 0;
-            color: #fff;
-            font-size: 12px;
+            color: #ffffff;
+            font-weight: 400;
+            font-size: 16px;
            	position: absolute;
             width: 100%;
             height: 100%;
@@ -18,7 +19,8 @@
             filter: blur(5px);
             z-index: 0;
         }
-        /* legend for the fieldset - "Login" */
+
+        /* legend for the fieldset - Welcome */
         legend
         {
             text-align: center;
@@ -30,6 +32,7 @@
             padding-left: 25px;
             padding-right: 25px;
         }
+
         /* where the logo would go */
         img
         {
@@ -41,22 +44,23 @@
             transform: translate(-50%,0%);
             z-index: 2;
         }
-        /* the login box style */
+
+        /*user options location */
         fieldset
         {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
             height: 250px;
             width: 300px;
+            transform: translate(-50%, -50%);
             background: #2f3c66;
             border: 1px solid rgba(255,255,255,0.6);
             border-radius: 10px;
-            color: #fff;
             padding: 10px;
             z-index: 2;
         }
+
         /* username box style */
         input[type='text']
         {
@@ -97,7 +101,32 @@
             outline: none;
             border: 1px solid rgba(255, 255, 255, 0.9);
         }
-        /* hyperlink to the register page */
+
+        /* style and actions for the buttons */
+        input[type='submit']
+        {
+            width: 260px;
+            height: 35px;
+            background: #d78c2a;
+            border: 1px solid #fff;
+            cursor: pointer;
+            border-radius: 10px;
+            color: #2f3c66;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 6px;
+            margin-top: 15px;
+        }
+        input[type='submit']:hover
+        {
+            opacity: 0.8;
+        }
+        input[type='submit']:active
+        {
+            opacity: 0.6;
+        }
+
+        /* hyperlink to the main page */
         a:link
         {
             display: inline-block;
@@ -119,60 +148,27 @@
             color: #ffffff;
             margin: 4px;
         }
-        /* style and actions for the Login button */
-        input[type='submit']
-        {
-            width: 260px;
-            height: 35px;
-            background: #d78c2a;
-            border: 1px solid #ffffff;
-            cursor: pointer;
-            border-radius: 10px;
-            color: #2f3c66;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 6px;
-            margin-top: 10px;
-        }
-        input[type='submit']:hover
-        {
-            opacity: 0.8;
-        }
-        input[type='submit']:active
-        {
-            opacity: 0.6;
-        }
-
     </style>
 </head>
 <body>
 
-<img src="gaslogo.png" alt="Logo">
+    <img src="../static/img/gaslogo.png" alt="Logo">
 
-<form action="Home.html" name = "LoginForm">
     <fieldset align= "center">
-        <legend> Login </legend>
-        <input type="text" name="username" placeholder="Username" required/><br/>
-        <input type="password" name="pass" placeholder="Password" required/><br/>
-        <a href="ForgotAccountInformation.html"> Forgot password? </a>
-        <input type="submit" value="Login"/>
-        <br>
-        <a href="Register.html"> Don't have an account? Sign up now</a>
-    </fieldset>
-</form>
+        <legend> Retrieve Account </legend>
+
+        <form action="/main_page/" name="EmailInput">
+            <br>
+            Enter your email address to retrieve your account information
+            <br>
+            <input type="text" name="email" placeholder="Email" required/><br/>
+
+            <input type="submit" value="Send"/>
+        </form>
+        <a href="/main_page/"> Return to login page?</a>
+        </fieldset>
 <div style="height:18%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
 <div style="height:64%; width: 100%; text-align: center; background-color: white;"></div>
-<div style="height:9%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
-<div id="footer" align="center">
-	<ul>
-		<a href="About.html">About &emsp;</a>
-		<a href="#">&emsp; Help &emsp;</a>
-		<a href="#">&emsp; Contact &emsp;</a>
-		<a href="#">&emsp; Terms &emsp;</a>
-		<a href="#">&emsp;Privacy &emsp;</a>
-		<a href="Advertise.html">&emsp;Advertise&emsp;</a>
-        &emsp;Copyright &copy; 2015
-	</ul>
-</div>
+<div style="height:18%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
 </body>
 </html>

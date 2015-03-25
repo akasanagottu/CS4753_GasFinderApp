@@ -2,14 +2,14 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Register Page</title>
+    <title> Account </title>
     <style type="text/css">
         /* body of website style */
         body
         {
             margin: 0;
             padding: 0;
-            color: #888;
+            color: #fff;
             font-size: 12px;
            	position: absolute;
             width: 100%;
@@ -18,7 +18,8 @@
             filter: blur(5px);
             z-index: 0;
         }
-        /* legend for the fieldset - "Register" */
+
+        /* legend for the fieldset - Welcome */
         legend
         {
             text-align: center;
@@ -30,6 +31,7 @@
             padding-left: 25px;
             padding-right: 25px;
         }
+
         /* where the logo would go */
         img
         {
@@ -41,23 +43,24 @@
             transform: translate(-50%,0%);
             z-index: 2;
         }
-        /* the register box style */
+
+        /*user options location */
         fieldset
         {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            height: 250px;
+            height: 200px;
             width: 300px;
+            transform: translate(-50%, -50%);
             background: #2f3c66;
             border: 1px solid rgba(255,255,255,0.6);
             border-radius: 10px;
-            color: #fff;
             padding: 10px;
             z-index: 2;
         }
-        /* general info box style */
+
+        /* username box style */
         input[type='text']
         {
             width: 250px;
@@ -97,6 +100,31 @@
             outline: none;
             border: 1px solid rgba(255, 255, 255, 0.9);
         }
+
+        /* style and actions for the buttons */
+        input[type='submit']
+        {
+            width: 260px;
+            height: 35px;
+            background: #d78c2a;
+            border: 1px solid #fff;
+            cursor: pointer;
+            border-radius: 10px;
+            color: #2f3c66;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 6px;
+            margin-top: 15px;
+        }
+        input[type='submit']:hover
+        {
+            opacity: 0.8;
+        }
+        input[type='submit']:active
+        {
+            opacity: 0.6;
+        }
+
         /* hyperlink to the register page */
         a:link
         {
@@ -104,6 +132,7 @@
             color: #ffffff;
             font-size: 12px;
             margin-top: 6px;
+            text-decoration: none;
         }
         a:hover
         {
@@ -118,45 +147,60 @@
             color: #ffffff;
             margin: 4px;
         }
-        /* style and actions for the Login button */
-        input[type='submit']
+
+        /* log out and home button location */
+        .logoutButton
         {
-            width: 260px;
-            height: 35px;
-            background: #d78c2a;
-            border: 1px solid #ffffff;
-            cursor: pointer;
-            border-radius: 10px;
-            color: #2f3c66;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 6px;
-            margin-top: 10px;
+            position: fixed;
+            right: 10px;
+            top: 25px;
         }
-        input[type='submit']:hover
+        .homeButton
         {
-            opacity: 0.8;
-        }
-        input[type='submit']:active
-        {
-            opacity: 0.6;
+            position: fixed;
+            left: 10px;
+            top: 25px;
         }
     </style>
 </head>
 <body>
-<img src="gaslogo.png" alt="Logo">
-<form name = "RegisterForm">
+
+    <img src="../static/img/gaslogo.png" alt="Logo">
+
     <fieldset align= "center">
-        <legend> Sign Up </legend>
-        <input type="text" name="email" placeholder="Email" required/><br/>
-        <input type="text" name="username" placeholder="Username" pattern=".{3,12}" title="Enter 3 to 12 characters" required/><br/>
-        <input type="password" name="pass" placeholder="Password" pattern=".{6,12}" title="Enter 6 to 12 characters" required/><br/>
-        <a href="MainPage.html"> Return to login page?</a>
-        <input type="submit" value="Sign Up"/>
+        <legend> Account </legend>
+
+        <form name="ChangePassword">
+            <input type="text" name="CurrPass" placeholder="Current Password" required/><br/>
+            <input type="password" name="pass" placeholder="New Password" pattern=".{6,12}" title="Enter 6 to 12 characters" required/><br/>
+            <input type="submit" value="Change Password"/>
+        </form>
+
+
     </fieldset>
-</form>
+    <form align="right" name="Logout">
+        <label class="logoutButton">
+        <input name="logout" type="submit" value="Log Out">
+        </label>
+    </form>
+    <form action="/" name="home">
+        <label class="homeButton">
+        <input name="home" type="submit" value="Home">
+        </label>
+    </form>
 <div style="height:18%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
 <div style="height:64%; width: 100%; text-align: center; background-color: white;"></div>
-<div style="height:18%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
+<div style="height:9%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
+<div id="footer" align="center">
+	<ul>
+		<a href="/about/">About &emsp;</a>
+		<a href="#">&emsp; Help &emsp;</a>
+		<a href="#">&emsp; Contact &emsp;</a>
+		<a href="#">&emsp; Terms &emsp;</a>
+		<a href="#">&emsp;Privacy &emsp;</a>
+		<a href="/advertise/">&emsp;Advertise&emsp;</a>
+        &emsp;Copyright &copy; 2015
+	</ul>
+</div>
 </body>
 </html>
