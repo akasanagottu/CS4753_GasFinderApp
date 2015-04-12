@@ -170,15 +170,18 @@
     <fieldset align= "center">
         <legend> Account </legend>
 
-        <form name="ChangePassword">
-            <input type="text" name="CurrPass" placeholder="Current Password" required/><br/>
-            <input type="password" name="pass" placeholder="New Password" pattern=".{6,12}" title="Enter 6 to 12 characters" required/><br/>
+        <form name="ChangePassword" action="/account/" method="post">
+            {% csrf_token %}
+            <input type="password" name="CurrentPassword" placeholder="Current Password" required/><br/>
+            <input type="password" name="NewPassword" placeholder="New Password" pattern=".{6,12}" title="Enter 6 to 12 characters" required/><br/>
             <input type="submit" value="Change Password"/>
+            <div style= "color: red font-size: 16px"> {{ message }} </div>
+
         </form>
 
 
     </fieldset>
-    <form align="right" name="Logout">
+    <form align="right" name="Logout" action="/logout/">
         <label class="logoutButton">
         <input name="logout" type="submit" value="Log Out">
         </label>

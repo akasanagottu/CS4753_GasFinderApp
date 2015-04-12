@@ -206,15 +206,35 @@
 
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script>
+        var geocoder;
+        var map;
+
       function initialize() {
+        geocoder = new google.maps.Geocoder();
         var mapCanvas = document.getElementById('map-canvas');
         var mapOptions = {
           center: new google.maps.LatLng(44.5403, -78.5463),
-          zoom: 8,
+          zoom: 12,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
-        var map = new google.maps.Map(mapCanvas, mapOptions)
+        map = new google.maps.Map(mapCanvas, mapOptions)
       }
+
+      function codeAddress() {
+          var address = document.getElementById('address').value;
+          geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              map.setCenter(results[0].geometry.location);
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location
+              });
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+}
+
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 </head>
@@ -229,31 +249,31 @@
 
         <div id="content_1" class="content">
             <ul>
-                <form name = "LocalSearch">
-                    <input type="text" name="currLoc" placeholder="Current Location" required/><br/>
+                <!--<form name = "LocalSearch">-->
+                    <input type="text" name="currLoc" placeholder="Current Location" id="address" required/><br/>
                     <input type="text" name="radius" placeholder="Radius of Search (miles)" pattern="[0-9]{1,2}" title="Enter up to 20 miles"required/><br/>
                         <br>
                         Pick gasoline type: <br>
                     <input type="checkbox" name="87oct" value="87octane"> 87 octane <br>
                     <input type="checkbox" name="89oct" value="89octane"> 89 octane <br>
                     <input type="checkbox" name="92oct" value="92octane"> 92 octane <br>
-                    <input type="submit" value="Search"/>
-                </form>
+                    <input type="submit" value="Search" onclick="codeAddress()" />
+                <!--</form>-->
             </ul>
         </div>
 
         <div id="content_2" class="content">
             <ul>
-                <form name = "TravelSearch">
-                    <input type="text" name="currLoc" placeholder="Current Location" required/><br/>
+                <!--<form name = "TravelSearch" onsubmit="codeAddress()">-->
+                    <input type="text" name="currLoc" placeholder="Current Location" id="address" required/><br/>
                     <input type="text" name="destination" placeholder="Destination" required/><br/>
                         <br>
                         Pick gasoline type: <br>
                     <input type="checkbox" name="87oct" value="87octane"> 87 octane <br>
                     <input type="checkbox" name="89oct" value="89octane"> 89 octane <br>
                     <input type="checkbox" name="92oct" value="92octane"> 92 octane <br>
-                    <input type="submit" value="Search"/>
-                </form>
+                    <input type="button" value="Search" onsubmit="codeAddress()"/>
+                <!--</form>-->
             </ul>
         </div>
     </div>
@@ -263,13 +283,13 @@
             <div id="map-canvas"></div>
     </fieldset>
 
-    <form name="Logout">
-      <label class="logoutButton">
-      <input name="logout" type="submit" value="Log Out">
-      </label>
+    <form align="right" name="Logout" action="/logout/">
+        <label class="logoutButton">
+        <input name="logout" type="submit" value="Log Out">
+        </label>
     </form>
 
-    <form action="/" name="home">
+    <form action="/home/" name="home">
       <label class="homeButton">
       <input name="home" type="submit" value="Home">
       </label>

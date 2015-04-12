@@ -4,6 +4,45 @@
     <meta charset="UTF-8">
     <title>Advertise</title>
     <style type="text/css">
+
+
+        #left
+        {
+            color: #000;
+            position: fixed;
+            top: 50%;
+            left: 20%;
+            height: 200px;
+            width: 300px;
+            transform: translate(-50%, -50%);
+            background: #FFFFFF;
+            border: 1px solid #2f3c66;
+            border-radius: 10px;
+            padding: 10px;
+            z-index: 0;
+        }
+
+        #right
+        {
+            color: #000;
+            position: fixed;
+            top: 50%;
+            left: 80%;
+            height: 200px;
+            width: 300px;
+            transform: translate(-50%, -50%);
+            background: #FFFFFF;
+            border: 1px solid #2f3c66;
+            border-radius: 10px;
+            padding: 10px;
+            z-index: 0;
+        }
+
+        #upper
+        {
+            height: 100px;
+        }
+
         /* body of website style */
         body
         {
@@ -59,6 +98,9 @@
             padding: 10px;
             z-index: 2;
         }
+
+                /*user options location */
+
 
         /* style and actions for the buttons */
         input[type='submit']
@@ -119,27 +161,76 @@
 
     <img src="../static/img/gaslogo.png" alt="Logo">
 
+    {% if submitted %}
+
     <fieldset align= "center">
+        <strong>Thank you for advertising! You will be sponsored on our website now!</strong>
+        <a href="/">Return to the homepage.</a><br />
+        </fieldset>
+
+    {% else %}
+
+        <fieldset align= "center">
         <legend> Welcome </legend>
-
-        <form action="/search/">
-            <input type="submit" value="Search"/>
-        </form>
-
-        <form action="/submit_price/">
-            <input type="submit" value="Submit Prices"/>
-        </form>
-
-        <form action="/account/">
-            <input type="submit" value="Account"/>
+        <form name = "AdvertiseForm" action="/advertise/" method="post">
+            {% csrf_token %}
+            {{ advertiser_form.name }} <br>
+            {{ advertiser_form.email }} <br>
+            {{ advertiser_form.tiers }}
+            <input type="submit" value="Advertise"/>
+            <a href="/"> Return to login page?</a>
         </form>
 
     </fieldset>
-    <form align="right" name="Logout">
-        <label class="logoutButton">
-        <input name="logout" type="submit" value="Log Out">
-        </label>
-    </form>
+
+    {% endif %}
+
+
+        <div id="left">
+
+
+<div id="upper">
+<div><u><b>Bronze</b></u></div>
+
+ {% for ad in bronzeList %}
+    <div>
+            {{ad.name}}
+    </div>
+ {% endfor %}
+</div>
+
+<div><u><b>Silver</b></u></div>
+
+ {% for ad in silverList %}
+    <div>
+            {{ad.name}}
+    </div>
+ {% endfor %}
+
+        </div>
+
+<div id="right">
+<div id="upper">
+ <div ><b><u>Gold</u></b></div>
+
+ {% for ad in goldList %}
+    <div>
+            {{ad.name}}
+    </div>
+ {% endfor %}
+</div>
+ <div><u><b>Platinum</b></u></div>
+
+ {% for ad in platList %}
+    <div>
+            {{ad.name}}
+    </div>
+ {% endfor %}
+
+</div>
+
+
+
 <div style="height:18%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
 <div style="height:64%; width: 100%; text-align: center; background-color: white;"></div>
 <div style="height:9%; width: 100%; text-align: center; background-color: #2f3c66;"></div>

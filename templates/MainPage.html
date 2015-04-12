@@ -5,6 +5,7 @@
     <title>Main Page</title>
     <style type="text/css">
         /* body of website style */
+
         body
         {
             margin: 0;
@@ -149,17 +150,25 @@
 
 <img src="../static/img/gaslogo.png" alt="Logo">
 
-<form action="/" name = "LoginForm">
+<form name = "LoginForm" action="/" method="post">
+    {% csrf_token %}
     <fieldset align= "center">
         <legend> Login </legend>
         <input type="text" name="username" placeholder="Username" required/><br/>
-        <input type="password" name="pass" placeholder="Password" required/><br/>
-        <a href="/forgot_account/"> Forgot password? </a>
+        <input type="password" name="password" placeholder="Password" required/><br/>
         <input type="submit" value="Login"/>
         <br>
         <a href="/register/"> Don't have an account? Sign up now</a>
+        <div style= "color: red font-size: 16px"> {{ message }} </div>
+
     </fieldset>
+
+
+
+
 </form>
+
+
 <div style="height:18%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
 <div style="height:64%; width: 100%; text-align: center; background-color: white;"></div>
 <div style="height:9%; width: 100%; text-align: center; background-color: #2f3c66;"></div>

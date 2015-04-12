@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'GasFinder',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,3 +92,5 @@ STATIC_PATH = os.path.join(BASE_DIR,'static')
 STATICFILES_DIRS = (
     STATIC_PATH,
 )
+
+LOGIN_URL = '/'

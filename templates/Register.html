@@ -145,16 +145,27 @@
 </head>
 <body>
 <img src="../static/img/gaslogo.png" alt="Logo">
-<form name = "RegisterForm">
+
+{% if registered %}
+        <fieldset align= "center">
+        <strong>Thank you for registering!</strong>
+        <a href="/">Return to the homepage.</a><br />
+        </fieldset>
+
+{% else %}
+
+<form name = "RegisterForm" action="/register/" method="post">
+    {% csrf_token %}
     <fieldset align= "center">
         <legend> Sign Up </legend>
-        <input type="text" name="email" placeholder="Email" required/><br/>
-        <input type="text" name="username" placeholder="Username" pattern=".{3,12}" title="Enter 3 to 12 characters" required/><br/>
-        <input type="password" name="pass" placeholder="Password" pattern=".{6,12}" title="Enter 6 to 12 characters" required/><br/>
-        <a href="/main_page/"> Return to login page?</a>
+        {{ user_form.username }}
+        {{ user_form.password }}
+        <a href="/"> Return to login page?</a>
         <input type="submit" value="Sign Up"/>
     </fieldset>
 </form>
+{% endif %}
+
 <div style="height:18%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
 <div style="height:64%; width: 100%; text-align: center; background-color: white;"></div>
 <div style="height:18%; width: 100%; text-align: center; background-color: #2f3c66;"></div>
