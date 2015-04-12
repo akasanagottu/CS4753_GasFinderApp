@@ -82,7 +82,7 @@ def account(request):
         if s.check_password(request.POST['CurrentPassword']):
             s.set_password(request.POST['NewPassword'])
             s.save()
-            return render_to_response('Account.html', {'message': 'Your password has been successfully changed.'}, context)
+            return render_to_response('MainPage.html', {'message': 'Your password has been successfully changed. Please login again.'}, context)
 
         return render_to_response('Account.html', {'message': 'Your password was not able to be changed. Please try again.'}, context)
     else:
