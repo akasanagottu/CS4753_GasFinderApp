@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from GasFinder.models import Advertiser
+from GasFinder.models import Advertiser, Station
 from GasFinder.forms import UserForm, AdvertiserForm
 
 @login_required
@@ -17,6 +17,33 @@ def home(request):
 
 @login_required
 def search(request):
+    if request.method == 'POST':
+        #station = Station(address = request.POST["currLoc"], octane87 = request.POST["87oct"], octane89 = request.POST["89oct"], octane92 = request.POST["92oct"])
+        #station.save()
+        address = "'"+ request.POST["currLoc"] +"'"
+        addresses = []
+
+        if "87oct" in request.POST:
+            is87 = True
+        else:
+            is87 = False
+        if "89oct" in request.POST:
+            is89 = True
+        else:
+            is89 = False
+        if "92oct" in request.POST:
+            is92 = True
+        else:
+            is92 = False
+
+        print(is87)
+        print(is89)
+        print(is92)
+
+        stations = Station.objects.all()
+        for x in stations:
+            addresses.append("'" + x.address + "'")
+        return render(request, 'Search.html', {"pastAddress": address, 'stations': stations, 'stationAddresses': addresses, 'is87':is87, 'is89':is89, 'is92': is92 })
     return render(request, 'Search.html')
 
 @login_required
@@ -25,6 +52,11 @@ def search_local(request):
 
 @login_required
 def submit_price(request):
+    if request.method == 'POST':
+        station = Station(address = request.POST["currLoc"], octane87 = request.POST["87oct"], octane89 = request.POST["89oct"], octane92 = request.POST["92oct"])
+        station.save()
+        address = "'"+ request.POST["currLoc"] +"'"
+        return render(request, 'SubmitPrice.html', {"pastAddress": address})
     return render(request, 'SubmitPrice.html')
 
 @login_required

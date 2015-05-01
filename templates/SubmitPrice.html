@@ -212,7 +212,7 @@
 
       function initialize() {
         geocoder = new google.maps.Geocoder();
-        var mapCanvas = document.getElementById('map-canvas');
+        var mapCanvas = document.getElementById("map-canvas");
         var mapOptions = {
           center: new google.maps.LatLng(44.5403, -78.5463),
           zoom: 12,
@@ -222,7 +222,9 @@
       }
 
       function codeAddress() {
-          var address = document.getElementById('address').value;
+          {% autoescape off %}
+          var address = {{ pastAddress }}
+          {% endautoescape off %}
           geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
               map.setCenter(results[0].geometry.location);
@@ -234,12 +236,13 @@
               alert('Geocode was not successful for the following reason: ' + status);
             }
         });
+
 }
 
-      google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 </head>
 <body>
+
     <div id="tabbed_box_1" class="tabbed_box">
     <div class="tabbed_area">
 
@@ -249,12 +252,13 @@
 
         <div id="content_1" class="content">
             <ul>
-                <form name = "Price Enter">
+                <form name = "Price Enter" action="/submit_price/" method="post">
+                    {% csrf_token %}
                     <input type="text" name="currLoc" placeholder="Gas Station Location" id="address" required/><br/>
                     <input type="text" name="87oct" placeholder="Price for 87 octane" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" title="Enter in the form x.xx"required/><br/>
                     <input type="text" name="89oct" placeholder="Price for 89 octane" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" title="Enter in the form x.xx"required/><br/>
                     <input type="text" name="92oct" placeholder="Price for 92 octane" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" title="Enter in the form x.xx"required/><br/>
-                    <input type="submit" value="Submit" onclick="codeAddress()"/>
+                    <input type="submit" value="Submit"/>
                 </form>
             </ul>
         </div>
@@ -264,6 +268,17 @@
     <fieldset>
             <div id="map-canvas"></div>
     </fieldset>
+
+    {% if pastAddress %}
+        <script>
+            initialize();
+            codeAddress();
+        </script>
+    {% else %}
+        <script>
+            initialize();
+        </script>
+    {% endif %}
 
     <form align="right" name="Logout" action="/logout/">
         <label class="logoutButton">

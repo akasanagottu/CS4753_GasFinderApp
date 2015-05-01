@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/CS4753_GasApplication.iml" filepath="$PROJECT_DIR$/.idea/CS4753_GasApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/../GasApplication/.idea/GasApplication.iml" filepath="$PROJECT_DIR$/../GasApplication/.idea/GasApplication.iml" />
     </modules>
   </component>
 </project>
+

@@ -12,3 +12,9 @@ class Advertiser(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=75)
     tiers = models.CharField(max_length=1000, choices=tiers, default="Bronze")
+
+class Station(models.Model):
+    address = models.CharField(max_length=150, primary_key=True)
+    octane87 = models.DecimalField(max_digits=3, decimal_places=2)
+    octane89 = models.DecimalField(max_digits=3, decimal_places=2)
+    octane92 = models.DecimalField(max_digits=3, decimal_places=2)

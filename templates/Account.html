@@ -18,7 +18,11 @@
             filter: blur(5px);
             z-index: 0;
         }
-
+        .error
+        {
+            color: red;
+            font-size: 20px;
+        }
         /* legend for the fieldset - Welcome */
         legend
         {
@@ -175,7 +179,7 @@
             <input type="password" name="CurrentPassword" placeholder="Current Password" required/><br/>
             <input type="password" name="NewPassword" placeholder="New Password" pattern=".{6,12}" title="Enter 6 to 12 characters" required/><br/>
             <input type="submit" value="Change Password"/>
-            <div style= "color: red font-size: 16px"> {{ message }} </div>
+            <div class="error"> {{ message }} </div>
 
         </form>
 

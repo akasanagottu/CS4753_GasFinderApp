@@ -211,7 +211,7 @@
 
       function initialize() {
         geocoder = new google.maps.Geocoder();
-        var mapCanvas = document.getElementById('map-canvas');
+        var mapCanvas = document.getElementById("map-canvas");
         var mapOptions = {
           center: new google.maps.LatLng(44.5403, -78.5463),
           zoom: 12,
@@ -221,7 +221,9 @@
       }
 
       function codeAddress() {
-          var address = document.getElementById('address').value;
+          {% autoescape off %}
+          var address = {{ pastAddress }}
+          {% endautoescape off %}
           geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
               map.setCenter(results[0].geometry.location);
@@ -233,13 +235,92 @@
               alert('Geocode was not successful for the following reason: ' + status);
             }
         });
-}
 
-      google.maps.event.addDomListener(window, 'load', initialize);
+      {% for s in stationAddresses %}
+          {% autoescape off %}
+           var address = {{ s }}
+           {% endautoescape off %}
+            geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              map.setCenter(results[0].geometry.location);
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location
+              });
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+      });
+      {% endfor %}
+
+
+      }
+
     </script>
 </head>
 <body>
-    <div id="tabbed_box_1" class="tabbed_box">
+    <fieldset>
+            <div id="map-canvas"></div>
+    </fieldset>
+     {% if pastAddress %}
+
+         <div id="tabbed_box_1" class="tabbed_box">
+    <div class="tabbed_area">
+
+        <ul class="tabs">
+            <li><a href="" id="tab_1" class="active">Local</a></li>
+            <li><a href="" id="tab_2">Travel</a></li>
+        </ul>
+
+        <div id="content_1" class="content">
+            <ol>
+                {% for s in stations %}
+                    <li>
+                    {{ s.address }} <br/>
+                    {% if is87 %}
+                    Octane 87: {{ s.octane87 }} <br/>
+                    {% endif %}
+                    {% if is89 %}
+                    Octane 89: {{ s.octane89 }} <br/>
+                    {% endif %}
+                    {% if is92 %}
+                    Octane 92: {{ s.octane92 }} <br/>
+                    {% endif %}
+                    <br />
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+
+        <div id="content_2" class="content">
+            <ul>
+               <form name = "Price Enter" action="/search/" method="post">
+                   {% csrf_token %}
+                    <input type="text" name="currLoc" placeholder="Current Location" id="address" required/><br/>
+                    <input type="text" name="destination" placeholder="Destination" required/><br/>
+                        <br>
+                        Pick gasoline type: <br>
+                    <input type="checkbox" name="87oct" value="87octane"> 87 octane <br>
+                    <input type="checkbox" name="89oct" value="89octane"> 89 octane <br>
+                    <input type="checkbox" name="92oct" value="92octane"> 92 octane <br>
+                    <input type="submit" value="Submit"/>
+                </form>
+            </ul>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+        <script>
+            initialize();
+            codeAddress();
+        </script>
+    {% else %}
+
+         <div id="tabbed_box_1" class="tabbed_box">
     <div class="tabbed_area">
 
         <ul class="tabs">
@@ -249,7 +330,8 @@
 
         <div id="content_1" class="content">
             <ul>
-                <!--<form name = "LocalSearch">-->
+                <form name = "Price Enter" action="/search/" method="post">
+                    {% csrf_token %}
                     <input type="text" name="currLoc" placeholder="Current Location" id="address" required/><br/>
                     <input type="text" name="radius" placeholder="Radius of Search (miles)" pattern="[0-9]{1,2}" title="Enter up to 20 miles"required/><br/>
                         <br>
@@ -257,14 +339,15 @@
                     <input type="checkbox" name="87oct" value="87octane"> 87 octane <br>
                     <input type="checkbox" name="89oct" value="89octane"> 89 octane <br>
                     <input type="checkbox" name="92oct" value="92octane"> 92 octane <br>
-                    <input type="submit" value="Search" onclick="codeAddress()" />
-                <!--</form>-->
+                    <input type="submit" value="Submit"/>
+                </form>
             </ul>
         </div>
 
         <div id="content_2" class="content">
             <ul>
-                <!--<form name = "TravelSearch" onsubmit="codeAddress()">-->
+               <form name = "Price Enter" action="/search/" method="post">
+                   {% csrf_token %}
                     <input type="text" name="currLoc" placeholder="Current Location" id="address" required/><br/>
                     <input type="text" name="destination" placeholder="Destination" required/><br/>
                         <br>
@@ -272,16 +355,20 @@
                     <input type="checkbox" name="87oct" value="87octane"> 87 octane <br>
                     <input type="checkbox" name="89oct" value="89octane"> 89 octane <br>
                     <input type="checkbox" name="92oct" value="92octane"> 92 octane <br>
-                    <input type="button" value="Search" onsubmit="codeAddress()"/>
-                <!--</form>-->
+                    <input type="submit" value="Submit"/>
+                </form>
             </ul>
         </div>
     </div>
     </div>
 
-    <fieldset>
-            <div id="map-canvas"></div>
-    </fieldset>
+
+
+
+        <script>
+            initialize();
+        </script>
+    {% endif %}
 
     <form align="right" name="Logout" action="/logout/">
         <label class="logoutButton">
